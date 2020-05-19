@@ -1,5 +1,7 @@
 # SecDev Quarantine Network
 
+[![Build Status](https://drone.techservices.illinois.edu/api/badges/techservicesillinois/secdev-quarantinenetwork/status.svg)](https://drone.techservices.illinois.edu/techservicesillinois/secdev-quarantinenetwork)
+
 ## What is this?
 This is the source code for an API allowing management of users that have been placed on the quarantine network. 
 
