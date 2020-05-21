@@ -1,0 +1,7 @@
+pipeline:
+    build:
+      image: python:3.8
+      commands:
+        - export DOCKER_RUN=python
+        - make deps
+        - make test
