@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "6bbe764a-c378-4f1b-a05d-f8c3b5fb4d61",
+		"name": "ClearPass API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ApiAuthentication",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"grant_type\":\"client_credentials\",\r\n\t\"client_id\":\"qn_test_key\",\r\n\t\"client_secret\":\"{{client_secret}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cplab1.techservices.illinois.edu:443/api/oauth",
+					"protocol": "https",
+					"host": [
+						"cplab1",
+						"techservices",
+						"illinois",
+						"edu"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"oauth"
+					]
+				},
+				"description": "Obtain an OAuth2 access token for making API calls"
+			},
+			"response": []
+		},
+		{
+			"name": "LocalUser ",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://cplab1.techservices.illinois.edu:443/api/local-user?filter=%7B%7D&sort=%2Bid&offset=0&limit=25&calculate_count=false",
+					"protocol": "https",
+					"host": [
+						"cplab1",
+						"techservices",
+						"illinois",
+						"edu"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"local-user"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "%7B%7D"
+						},
+						{
+							"key": "sort",
+							"value": "%2Bid"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "25"
+						},
+						{
+							"key": "calculate_count",
+							"value": "false"
+						}
+					]
+				},
+				"description": "Get a list of local users."
+			},
+			"response": []
+		},
+		{
+			"name": "Role",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://cplab1.techservices.illinois.edu:443/api/role?filter=%7B%7D&sort=%2Bid&offset=0&limit=25&calculate_count=false",
+					"protocol": "https",
+					"host": [
+						"cplab1",
+						"techservices",
+						"illinois",
+						"edu"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"role"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "%7B%7D"
+						},
+						{
+							"key": "sort",
+							"value": "%2Bid"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "25"
+						},
+						{
+							"key": "calculate_count",
+							"value": "false"
+						}
+					]
+				},
+				"description": "Get a list of roles."
+			},
+			"response": []
+		},
+		{
+			"name": "api-client",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://cplab1.techservices.illinois.edu:443/api/api-client?filter=%7B%7D&sort=%2Bid&offset=0&limit=25&calculate_count=false",
+					"protocol": "https",
+					"host": [
+						"cplab1",
+						"techservices",
+						"illinois",
+						"edu"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"api-client"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "%7B%7D"
+						},
+						{
+							"key": "sort",
+							"value": "%2Bid"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "25"
+						},
+						{
+							"key": "calculate_count",
+							"value": "false"
+						}
+					]
+				},
+				"description": "Get a list of API clients."
+			},
+			"response": []
+		},
+		{
+			"name": "MAC Insight",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://cplab1.techservices.illinois.edu:443/api/insight/endpoint/mac/{{test_mac}}",
+					"protocol": "https",
+					"host": [
+						"cplab1",
+						"techservices",
+						"illinois",
+						"edu"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"insight",
+						"endpoint",
+						"mac",
+						"{{test_mac}}"
+					]
+				},
+				"description": "Get's MAC address information from Insight API endpoint"
+			},
+			"response": []
+		},
+		{
+			"name": "IP Insight",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://cplab1.techservices.illinois.edu:443/api/insight/endpoint/ip/{{test_ip}}",
+					"protocol": "https",
+					"host": [
+						"cplab1",
+						"techservices",
+						"illinois",
+						"edu"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"insight",
+						"endpoint",
+						"ip",
+						"{{test_ip}}"
+					]
+				},
+				"description": "Get's IP address information from Insight API endpoint"
+			},
+			"response": []
+		},
+		{
+			"name": "Time Range Insight",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://cplab1.techservices.illinois.edu:443/api/insight/endpoint/time-range/1588291200/1590019200",
+					"protocol": "https",
+					"host": [
+						"cplab1",
+						"techservices",
+						"illinois",
+						"edu"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"insight",
+						"endpoint",
+						"time-range",
+						"1588291200",
+						"1590019200"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
