@@ -1,6 +1,6 @@
 # SecDev Quarantine Network
 
-[![Build Status](https://drone.techservices.illinois.edu/api/badges/techservicesillinois/secdev-quarantinenetwork/status.svg)](https://drone.techservices.illinois.edu/techservicesillinois/secdev-quarantinenetwork)
+![Code Compliance](https://github.com/techservicesillinois/secdev-quarantinenetwork/workflows/Code%20Compliance/badge.svg)
 
 ## What is this?
 This is the source code for an API allowing management of users that have been placed on the quarantine network. 
@@ -22,7 +22,6 @@ This is the source code for an API allowing management of users that have been p
     choco install docker-desktop
     choco install make
     ```
-1. Add C:\Program Files\Git\usr\bin to PATH, if it not already.
 
     Note: If running on Apple, install Brew and then replace `choco` with `brew`. If running on Linux, replace `choco` with `apt-get` or your package manager of choice.
 
@@ -44,7 +43,7 @@ This is the source code for an API allowing management of users that have been p
     ```
     to start the development server. 
 
-    If you change the Makefile, requirements.in, or Dockerfile run:
+    If you change the Makefile, any of the *.in files, or Dockerfile run:
     ```
     > make clean
     > make

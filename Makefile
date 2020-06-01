@@ -1,36 +1,37 @@
-.PHONY: build run clean shell all
-SRCS:=Dockerfile requirements.txt requirements-dev.txt app.py
-IMAGE:=quaratine_api
-PORT:=5000:5000
-DARGS:=-it --rm -v $(CURDIR):/app
-DOCKER_RUN?=docker run $(DARGS) -p $(PORT) $(IMAGE)
+.PHONY: all run shell test build clean force-clean upgrade
 
 all: run
 
+run: build
+	docker-compose up
+
 build: .build
-.build: $(SRCS)
-	docker build -t $(IMAGE) .
+.build: requirements.txt requirements-dev.txt Dockerfile
+	docker-compose build
 	echo > $@
 
-run: build
-	$(DOCKER_RUN)
-
-test:
-	$(DOCKER_RUN) -m flake8
-
 shell: build
-	docker run $(DARGS) --entrypoint /bin/bash $(IMAGE)
+	docker-compose run api bash
+
+test: build
+	docker-compose run api bash -c 'flake8'
+
+clean: 
+	- rm .build
+	- del .build
+	- docker-compose down --rmi all
+
+force-clean: clean
+	-rm requirements.txt
+	-del requirements.txt
+	-rm requirements-dev.txt 
+	-del requirements-dev.txt 
+
+upgrade: force-clean requirements.txt requirements-dev.txt
 
 requirements.txt: requirements.in
-	docker run -it --rm -v $(CURDIR):/usr/src --entrypoint bash python:3.8 -c 'pip install -qqqr /usr/src/requirements.in && pip freeze' > $@
+	docker run -it --rm -v $(CURDIR):/usr/src --entrypoint bash python:3.8 -c "pip install -qqqr /usr/src/requirements.in && pip freeze" > $@
 
 requirements-dev.txt: requirements-dev.in
-	docker run -it --rm -v $(CURDIR):/usr/src --entrypoint bash python:3.8 -c 'pip install -qqqr /usr/src/requirements-dev.in && pip freeze' > $@
+	docker run -it --rm -v $(CURDIR):/usr/src --entrypoint bash python:3.8 -c "pip install -qqqr /usr/src/requirements-dev.in && pip freeze" > $@
 
-deps:
-	pip install -r requirements.txt
-	pip install -r requirements-dev.txt
-
-clean:
-	- rm .build
-	- docker rmi $(IMAGE)
