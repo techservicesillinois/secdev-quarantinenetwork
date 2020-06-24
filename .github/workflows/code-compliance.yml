@@ -16,5 +16,5 @@ jobs:
     - name: build image
       run: make build
 
-    - name: flake8 test
+    - name: run tests
       run: make test

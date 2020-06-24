@@ -14,7 +14,7 @@ shell: build
 	docker-compose run api bash
 
 test: build
-	docker-compose run api bash -c 'flake8'
+	docker-compose run api bash -c 'flake8 && mypy .'
 
 clean: 
 	- rm .build
