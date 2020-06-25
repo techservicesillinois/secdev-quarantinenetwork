@@ -31,6 +31,14 @@ This is the source code for an API allowing management of users that have been p
     > git clone https://github.com/techservicesillinois/secdev-quarantinenetwork.git
     ``` 
 
+1. Add a .env file to the project root and add the following keys and values:
+
+    ```
+    CLIENT_ID=qn_test_key
+    CLIENT_SECRET=<add client secret here>
+    ```
+    A SecDev team member can help you obtain the dev API key.
+
 1. Build and run Docker image:
     ```
     > make
