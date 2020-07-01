@@ -1,14 +1,31 @@
 from flask import Flask, jsonify
-import requests
+import functools
 import os
+import requests
+import sys
 
 
 app = Flask(__name__)
+
 
 BASE_URL = os.environ.get('BASE_URL',
                           'https://cplab1.techservices.illinois.edu:443/api')
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
+
+
+def handle_exception(func):
+    """
+    Handles exceptions and logging for any decorated
+    function.
+    """
+    @functools.wraps(func)
+    def wrapper(*args, ** kwargs):
+        try:
+            func(*args, **kwargs)
+        except Exception as e:
+            sys.stderr.write(f'{func.__name__} threw exception {e}.')
+    return wrapper
 
 
 @app.route('/canary')
@@ -18,20 +35,27 @@ def canary():
     that the API has. If any dependency is unavailable return an
     error message.
     """
-    canary_result = 'Ok'
+    messages = []
     status_code = 200
-
-    # Check Clearpass API dependency
-    token_response = get_clearpass_token(CLIENT_ID, CLIENT_SECRET)
-
-    if not token_response['token'] or token_response['status_code'] != 200:
-        canary_result = {
-            'Error': 'An error occured while checking dependencies.'
-        }
+    try:
+        # Check Clearpass API dependency
+        token = get_clearpass_token(CLIENT_ID, CLIENT_SECRET)
+        if not token:
+            messages.append('No token returned from clearpass API.')
+            status_code = 503
+    except requests.RequestException:
+        message = 'Request error ocurred during canary check'
+        messages.append(message)
         status_code = 503
-        # TODO: Log more details for troubleshooting.
 
-    return jsonify(canary_result), status_code
+        sys.stderr.write(message)
+    except Exception:
+        message = 'Error ocurred during canary check.'
+        messages.append(message)
+        status_code = 503
+
+        sys.stderr.write(message)
+    return jsonify({'messages': messages}), status_code
 
 
 def get_clearpass_token(client_id, client_secret):
@@ -55,23 +79,14 @@ def get_clearpass_token(client_id, client_secret):
         'client_secret': client_secret
     }
 
-    token_result = {
-        'status_code': 0,
-        'token': '',
-        'error_message': ''
-    }
+    token = None
 
-    try:
-        response = requests.post(url, json=data)
-        token_result['status_code'] = response.status_code
+    response = requests.post(url, json=data)
 
-        if response.status_code == 200:
-            token_result['token'] = response.json()['access_token']
-    except Exception:
-        # TODO: Log details
-        token_result['status_code'] = 500
+    if response.status_code == 200:
+        token = response.json()['access_token']
 
-    return token_result
+    return token
 
 
 if __name__ == '__main__':
