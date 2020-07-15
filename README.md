@@ -76,4 +76,6 @@ This is the source code for an API allowing management of users that have been p
     ```
     > make integration-test
     ```
-    to run integration tests against the api. These are not run in CI currently so please make sure they pass before submitting a pull request.
+    to run integration tests against the api. You will need to be connected to the VPN.
+    
+    These are not run in CI currently so please make sure they pass before submitting a pull request.
