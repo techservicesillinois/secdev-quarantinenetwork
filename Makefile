@@ -1,4 +1,4 @@
-.PHONY: all run shell test build clean force-clean upgrade
+.PHONY: all run shell test build clean force-clean upgrade integration-test
 
 all: run
 
@@ -15,6 +15,9 @@ shell: build
 
 test: build
 	docker-compose run api bash -c 'flake8 && mypy .'
+
+integration-test: build
+	docker run -it --network host --rm -v $(CURDIR)/test/integration:/usr/src postman/newman run '/usr/src/quarantine_network_api.postman_collection.json' -e '/usr/src/quarantine_network_dev.postman_environment.json'
 
 clean: 
 	- rm .build
