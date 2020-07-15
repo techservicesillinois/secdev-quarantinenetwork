@@ -63,3 +63,17 @@ This is the source code for an API allowing management of users that have been p
     > make shell
     ```
     to get a bash shell. 
+
+## How do I test it?
+
+1. Run:
+    ```
+    > make test
+    ```
+    to run the code compliance tests. These are are also run in Github Actions when a pull request is created.
+
+1. Run:
+    ```
+    > make integration-test
+    ```
+    to run integration tests against the api. These are not run in CI currently so please make sure they pass before submitting a pull request.
