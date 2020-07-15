@@ -17,7 +17,9 @@ test: build
 	docker-compose run api bash -c 'flake8 && mypy .'
 
 integration-test: build
-	docker run -it --network host --rm -v $(CURDIR)/test/integration:/usr/src postman/newman run '/usr/src/quarantine_network_api.postman_collection.json' -e '/usr/src/quarantine_network_dev.postman_environment.json'
+	docker-compose up --detach
+	- docker run -it --network host --rm -v $(CURDIR)/test/integration:/usr/src postman/newman run '/usr/src/quarantine_network_api.postman_collection.json' -e '/usr/src/quarantine_network_dev.postman_environment.json'
+	docker-compose stop
 
 clean: 
 	- rm .build
