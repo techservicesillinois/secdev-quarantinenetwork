@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "8f5a46f6-21f4-4f88-a490-2cc04cc095f7",
+		"name": "Quarantine Network API",
+		"description": "A collection of calls to the Quarantine Network API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/canary",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "500ff07c-ca1b-4168-8236-099409a4e9ae",
+						"exec": [
+							"// Check status code \r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{qn_api_url}}/canary",
+					"protocol": "http",
+					"host": [
+						"{{qn_api_url}}"
+					],
+					"path": [
+						"canary"
+					]
+				},
+				"description": "Call to the canary endpoint to check the dependent services/libraries are available."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
