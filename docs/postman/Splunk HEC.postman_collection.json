@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "8cc34751-5b60-4acb-89f4-99ec27d008ff",
+		"name": "Splunk HEC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "basic_log_post",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{logging_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sourcetype\": \"test_sourcetype\",\n    \"event\": \"testing from walker1\",\n    \"fields\": {\n        \"user_source\": \"ryan's mbp\",\n        \"user_time\": \"{{$timestamp}}\",\n        \"reason\": \"too much testing\",\n        \"can_release\": \"True\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://splunk-hec.machinedata.illinois.edu:8088/services/collector/event",
+					"protocol": "https",
+					"host": [
+						"splunk-hec",
+						"machinedata",
+						"illinois",
+						"edu"
+					],
+					"port": "8088",
+					"path": [
+						"services",
+						"collector",
+						"event"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{logging_token}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}
