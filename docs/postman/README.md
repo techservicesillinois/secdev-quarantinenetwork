@@ -1,6 +1,6 @@
-# Clearpass API Postman Collection
+# Postman Collection
 
-This is a collection of calls to the clearpass API used during development of the quarantine API. This file can be imported into Postman. Postman is an API development environment. We are mostly using it to design and test. 
+This is a collection of calls to various APIs used during development of the quarantine API. These files can be imported into Postman. Postman is an API development environment. We are mostly using it to design and test. 
 
 ### Prerequisites
 
@@ -35,7 +35,7 @@ https://learning.postman.com/docs/postman/launching-postman/installation-and-upd
 1. Open Postman and choose import
     ![image](https://user-images.githubusercontent.com/4566388/82709416-2aec6280-9c46-11ea-8fae-f197ca728b0f.png)
 
-1. Drag and drop (or click Upload Files and browse to) the /test/postman/ClearPass API.postman_collection.json file in the repo. 
+1. Drag and drop (or click Upload Files and browse to) the /docs/postman/ClearPass API.postman_collection.json file (for example) in the repo. 
 
 1. Double check the file information and click the import button.
 
