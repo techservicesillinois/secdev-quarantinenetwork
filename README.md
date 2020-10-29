@@ -58,6 +58,12 @@ This is the source code for an API allowing management of users that have been p
     ```
     to build the images again. 
 
+    If you want to upgrade the packages in the requirements files run:
+    ```
+    > make upgrade
+    > make
+    ```
+
     You can also run:
     ```
     > make shell
